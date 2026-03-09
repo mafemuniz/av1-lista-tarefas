@@ -1,0 +1,63 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url(https://alchetron.com/cdn/nate-archibald-781ff2c6-5ec6-4f23-9ed6-5e166733e9a-resize-750.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    min-height: 150vh;
+}
+h1{
+    color: white;
+    margin-bottom: 20px;
+}
+form{
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+input{
+    padding: 8px;
+    width: 350px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+button{
+    padding: 8px 12px;
+    background-color: #140b68;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: #110645;
+}
+#mensagem{
+    height: 20px;
+    margin-bottom: 10px;
+    color: red;
+    font-size: 14px;
+}
+ul{
+    list-style: none;
+    width: 300px;
+}
+li{
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 8px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.erro{
+    color: red;
+}
