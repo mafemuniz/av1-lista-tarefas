@@ -1,69 +1,81 @@
 const tarefas = [];
+
 const form = document.querySelector("#form-tarefa");
 const input = document.querySelector("#input-tarefa");
 const lista = document.querySelector("#lista-tarefas");
 const mensagem = document.querySelector("#mensagem");
 
-function validarTarefa(texto){
-    if (texto.trim() === ""){
-        mensagem.textContent = "A tarefa não pode estar vazia.";
-        return false;
-    }
-    mensagem.textContent = "";
-    return true;
+function validarTarefa(texto) {
+  if (texto.trim() === "") {
+    mensagem.textContent = "A tarefa não pode estar vazia.";
+    return false;
+  }
+  mensagem.textContent = "";
+  return true;
 }
 
-function renderTarefas(){
-    lista.textContent = "";
+function renderTarefas() {
+  lista.textContent = "";
 
-    tarefas.forEach(function(tarefa, index){
-        const li = document.createElement("li");
+  tarefas.forEach(function (tarefa, index) {
+    const li = document.createElement("li");
 
-        const span = document.createElement("span");
-        span.textContent = tarefa;
+    const texto = document.createElement("p");
+    texto.textContent = tarefa;
 
-        const btnEditar = document.createElement("button");
-        btnEditar.textContent = "editar";
-        btnEditar.style.marginLeft = "10px";
+    // BOTÃO EDITAR
+    const btnEditar = document.createElement("button");
+    btnEditar.textContent = "Editar";
 
-        btnEditar.addEventListener("click", function(){
-            const novoTexto = prompt("Editar tarefa:", tarefa);
+    btnEditar.addEventListener("click", function () {
+      const inputEdit = document.createElement("input");
+      inputEdit.type = "text";
+      inputEdit.value = tarefa;
 
-            if(validarTarefa(novoTexto)){
-                tarefas[index] = novoTexto;
-                renderTarefas();
-            }
-        });
+      const btnSalvar = document.createElement("button");
+      btnSalvar.textContent = "Salvar";
 
-        const btnExcluir = document.createElement("button");
-        btnExcluir.textContent = "excluir";
-        btnExcluir.style.marginLeft = "5px";
+      btnSalvar.addEventListener("click", function () {
+        if (!validarTarefa(inputEdit.value)) return;
 
-        btnExcluir.addEventListener("click", function(){
-            tarefas.splice(index, 1);
-            renderTarefas();
-        });
+        tarefas[index] = inputEdit.value;
+        renderTarefas();
+      });
 
-        li.appendChild(span);
-        li.appendChild(btnEditar);
-        li.appendChild(btnExcluir);
-
-        lista.appendChild(li);
+      li.textContent = "";
+      li.appendChild(inputEdit);
+      li.appendChild(btnSalvar);
     });
+
+    // BOTÃO EXCLUIR
+    const btnExcluir = document.createElement("button");
+    btnExcluir.textContent = "Excluir";
+
+    btnExcluir.addEventListener("click", function () {
+      tarefas.splice(index, 1);
+      renderTarefas();
+    });
+
+    li.appendChild(texto);
+    li.appendChild(btnEditar);
+    li.appendChild(btnExcluir);
+
+    lista.appendChild(li);
+  });
 }
 
-form.addEventListener("submit", function(event){
-    event.preventDefault();
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-    const texto = input.value;
+  const texto = input.value;
 
-    if(!validarTarefa(texto)){
-        return;
-    }
+  if (!validarTarefa(texto)) {
+    return;
+  }
 
-    tarefas.push(texto);
-    input.value = "";
-    renderTarefas();
+  tarefas.push(texto);
+  input.value = "";
+  renderTarefas();
 });
 
 mensagem.classList.add("erro");
